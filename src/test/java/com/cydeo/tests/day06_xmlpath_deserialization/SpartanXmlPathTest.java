@@ -27,6 +27,8 @@ public class SpartanXmlPathTest extends SpartanTestBase {
      gender >Male
      phone >3584128232
      */
+
+
     @DisplayName("GET /spartans -> xml path")
     @Test
     public void spartanXMLPathTest() {
