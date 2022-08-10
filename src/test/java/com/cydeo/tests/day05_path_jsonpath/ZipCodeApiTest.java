@@ -62,12 +62,10 @@ public class ZipCodeApiTest {
         String state = jsonPath.getString("places[0].state");
         System.out.println("state = " + state);
         assertEquals("Virginia", state);
-
-
-
     }
 
     public void verifyZipCode(JsonPath jsonPath, String expZipCode) {
         assertEquals(expZipCode, jsonPath.getString("'post code'"));
     }
+
 }

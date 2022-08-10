@@ -1,13 +1,18 @@
 package com.cydeo.tests.day01_intro;
 
+import com.cydeo.utils.SpartanTestBase;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 
+import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
 
+import java.util.List;
+
+import static io.restassured.RestAssured.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class Practice3 {
     /*
@@ -21,18 +26,37 @@ public class Practice3 {
 - And json body contains "{}"
      */
 
-    String url = "https://jsonplaceholder.typicode.com/posts/{id}";
 
+String url=" https://jsonplaceholder.typicode.com/posts/{id}";
     @DisplayName("Q3")
     @Test
     public void task3() {
-        Response response = (Response) given().accept(ContentType.JSON)
-                .and().pathParam("id", 1)
-                .when().get(url)
-                .then().assertThat().statusCode(404)
-                .and().assertThat().body(containsString("{}"));
+        Response response = given().accept(ContentType.JSON)
+                .and().pathParam("id", 12345)
+                .when().get("url");
 
+        assertEquals(404, response.statusCode());
+        assertTrue(response.asString().contains("{}") , "{}");
+    }
+
+        @DisplayName("Q4")
+@Test
+        public void task4(){
+//            - Given accept type is Json
+            //            - Path param "id" value is 2
+            //            - When user sends request to  https://jsonplaceholder.typicode.com/posts/{id}/comments
+            Response response = given().accept(ContentType.JSON)
+                    .and().pathParam("id", 2)
+                    .when().get("/spartans/{id}");
+
+
+//            - Then status code is 200
+//            - And header Content - Type is Json
+//            - And json body contains "Presley.Mueller@myrl.com",  "Dallas@ole.me" , "Mallory_Kunze@marie.org"
+
+
+
+        }
 
     }
 
-}
